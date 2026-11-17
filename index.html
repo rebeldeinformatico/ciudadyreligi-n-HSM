@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Todos los caminos conducen al templo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=IM+Fell+English:ital@0;1&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ecdcb6;--paper:#f6ecd3;--ink:#2b1d10;--mute:#6b5238;--red:#8b1e1e;--blue:#2f4a7a;--gold:#a67c1f;--line:#b99a62;
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .1 0 0 0 .5 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+--stain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .28 0 0 0 0 .1 0 0 0 .9 -.28'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+--lat:rgba(166,124,31,.09);--col:rgba(47,74,122,.07);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c140c;--paper:#2a1e12;--ink:#ecdcb8;--mute:#bfa67a;--red:#e08a7a;--blue:#8fb0e6;--gold:#d4a94a;--line:#6b5230;--lat:rgba(212,169,74,.08);--col:rgba(143,176,230,.07)}}
+:root[data-theme="dark"]{--bg:#1c140c;--paper:#2a1e12;--ink:#ecdcb8;--mute:#bfa67a;--red:#e08a7a;--blue:#8fb0e6;--gold:#d4a94a;--line:#6b5230;--lat:rgba(212,169,74,.08);--col:rgba(143,176,230,.07)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:19px/1.6 'IM Fell English',Georgia,'Times New Roman',serif;background-color:var(--bg);background-image:radial-gradient(ellipse at center,transparent 55%,rgba(60,30,0,.22)),var(--stain),var(--grain);background-attachment:fixed,scroll,scroll}
+h1,h2,h3,h4{font-family:'Cinzel','Trajan Pro',Georgia,serif;letter-spacing:.04em;margin:0}
+.fk{font-family:'UnifrakturCook','Old English Text MT',Georgia,serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header{text-align:center;padding:50px 20px 34px;border-bottom:4px double var(--line)}
+header img{width:100px;background:#fff;border-radius:50%;padding:6px}
+header h1{font-size:clamp(1.6rem,5vw,2.6rem);color:var(--red);margin:16px 0 4px}
+.meta{font-size:.95rem;line-height:1.5}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px 16px;flex-wrap:wrap;justify-content:center;padding:10px;background:var(--paper);border-bottom:1px solid var(--line);font-family:'Cinzel',Georgia,serif;font-size:.8rem}
+nav a{color:var(--red);text-decoration:none}
+.duo{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:30px 0 6px}
+.duo div{flex:1 1 240px;max-width:380px;padding:18px;border:3px double var(--line);background:var(--paper);text-align:center}
+.duo b{display:block;font-size:2rem}
+.duo .c b{color:var(--blue)}.duo .i b{color:var(--red)}
+.hero{color:#f4e8c9;padding:76px 20px;background-size:cover;background-position:center;text-align:center}
+.hero h2{font-size:clamp(1.8rem,6vw,3rem);text-shadow:0 2px 8px #000}
+.hero p{max-width:620px;margin:12px auto 0;font-style:italic;text-shadow:0 1px 6px #000}
+.hero .fk{font-size:1.2em;color:#e9c46a}
+.bgc{background-image:repeating-linear-gradient(90deg,var(--col) 0 2px,transparent 2px 46px)}
+.bgi{background-image:repeating-linear-gradient(45deg,var(--lat) 0 1px,transparent 1px 16px),repeating-linear-gradient(-45deg,var(--lat) 0 1px,transparent 1px 16px)}
+.sec{padding:34px 0 10px}
+h3.t{color:var(--red);font-size:1.2rem;border-bottom:1px solid var(--line);padding-bottom:6px;margin:0 0 6px}
+h3.t::before{content:"✠ ";color:var(--gold)}
+.hint{color:var(--mute);font-size:.92rem;margin:0 0 14px;font-style:italic}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:block;padding:14px 16px;background:var(--paper);border:2px solid var(--line);border-top:5px solid var(--gold);box-shadow:3px 3px 0 rgba(60,30,0,.15)}
+.card:focus-visible{outline:3px solid var(--red)}
+.card h4{font-size:1rem;color:var(--ink)}
+.card .tz{font-size:.95rem;color:var(--mute);font-style:italic;margin-top:4px}
+.card .df{display:none;margin-top:8px;font-size:.98rem;border-top:1px dashed var(--line);padding-top:8px}
+.card[aria-expanded=true]{border-color:var(--gold)}.card[aria-expanded=true] .df{display:block}
+.card::after{content:"+ ver más";display:block;margin-top:6px;font:.7rem 'Cinzel',serif;color:var(--gold)}
+.card[aria-expanded=true]::after{content:"− cerrar"}
+.bgc .card{border-top-color:var(--blue)}
+blockquote{margin:10px 0;padding:12px 18px;background:var(--paper);border-left:5px solid var(--gold);font-style:italic;font-size:.98rem}
+blockquote p{margin:0}blockquote cite{display:block;margin-top:6px;font-style:normal;font-size:.85rem;color:var(--mute)}
+details{margin:14px 0;font-size:.95rem;border:1px dashed var(--line);padding:8px 14px;background:var(--paper)}
+summary{cursor:pointer;font:.8rem 'Cinzel',Georgia,serif;color:var(--gold);letter-spacing:.05em}
+details p{margin:8px 0 0}details a,figcaption a{color:var(--red);word-break:break-all}
+figure{margin:26px 0;text-align:center}
+figure img{max-width:100%;max-height:500px;border:6px double var(--line);background:var(--paper);padding:4px}
+figcaption{font-size:.92rem;color:var(--mute);margin-top:8px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tabs button,.btn{cursor:pointer;font:.78rem 'Cinzel',Georgia,serif;padding:8px 12px;border:2px solid var(--line);background:var(--paper);color:var(--ink)}
+.tabs button[aria-selected=true]{background:var(--red);color:#f6ecd3;border-color:var(--red)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cmp>div{padding:16px;background:var(--paper);border:2px solid var(--line)}
+.cmp .c{border-top:6px solid var(--blue)}.cmp .i{border-top:6px solid var(--red)}
+.cmp h4{font-size:.8rem;color:var(--mute)}.cmp .k{font:700 1.35rem 'Cinzel',serif;margin:4px 0 8px}
+.cmp .c .k{color:var(--blue)}.cmp .i .k{color:var(--red)}.cmp p{margin:0;font-size:.98rem}
+.ide{margin-top:12px;padding:12px 16px;text-align:center;font-style:italic;border:1px solid var(--gold);background:var(--paper)}
+@media(max-width:620px){.cmp{grid-template-columns:1fr}}
+.quiz{padding:20px;background:var(--paper);border:3px double var(--line);text-align:center}
+.quiz .q{font-size:1.2rem;min-height:3.6em}
+.quiz .row{display:flex;gap:10px;justify-content:center;margin:12px 0;flex-wrap:wrap}
+.quiz .fb{min-height:3.2em;font-size:.98rem}
+.ok{color:#2e6b2e}.no{color:var(--red)}
+.ccl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:12px}
+.ccl div{padding:14px 16px;background:var(--paper);border:2px solid var(--line);border-left:6px solid var(--gold)}
+.ccl b{font-family:'Cinzel',serif;font-size:.9rem;color:var(--red)}.ccl p{margin:4px 0 0;font-size:.98rem}
+footer{margin-top:44px;padding:28px 20px;text-align:center;border-top:4px double var(--line);font-size:.9rem;color:var(--mute)}
+.ex{margin-top:10px;padding-top:8px;border-top:1px dotted var(--line);font-size:.93rem;color:var(--mute)}.ex b{color:var(--gold);font:.72rem 'Cinzel',serif;letter-spacing:.05em}.dp{margin-top:14px;padding:14px 18px;background:var(--paper);border-left:5px solid var(--gold);text-align:justify;font-size:1rem}.dp b{font:.78rem 'Cinzel',serif;color:var(--gold);letter-spacing:.05em}</style></head><body>
+<header>
+<img src="images/logo_upn.png" alt="Logo de la Universidad Pedagógica Nacional">
+<h1>Todos los caminos conducen al templo</h1>
+<div class="fk" style="font-size:1.3rem;color:var(--mute);margin-bottom:16px">Las ciudades medievales y el factor religioso (siglos VII–X)</div>
+<div class="meta"><b>Autor:</b> Sebastián Mauricio Delgado Gómez<br>Universidad Pedagógica Nacional<br>Historia de las Sociedades Medievales</div>
+</header>
+<nav><a href="#inicio">Introducción</a><a href="#cristiana">Ciudad cristiana</a><a href="#islamica">Ciudad islámica</a><a href="#comparar">Comparador</a><a href="#juego">Ponte a prueba</a><a href="#conclusiones">Conclusiones</a><a href="#refs">Referencias</a></nav>
+
+<div class="wrap" id="inicio">
+<div class="sec"><h3 class="t">Introducción: ¿por qué explorar las ciudades?</h3>
+<p>En la Edad Media temprana la ciudad cobra valor como representación de una nueva temporalidad: es un espacio de articulación de la vida social, política y económica y el lugar predilecto para expresar las nuevas formas de relación social de las sociedades cristianas y musulmanas. No surge ni entra en su auge: <b>emerge como un espacio organizado bajo nuevos proyectos civilizatorios</b>.</p>
+<p>Occidente cristiano y bloque musulmán se dedicaron a organizar el espacio de sus ciudades para reflejar distintas formas de ver, vivir y hacer el mundo. Por eso estudiar esa organización espacial invita a valorar fuentes más allá de los documentos oficiales: lugares que fueron <i>lugares vivos</i>.</p>
+<blockquote><p>“Las ciudades han sido siempre los grandes escenarios históricos, no sólo de la crónica política y de los hechos espectaculares, sino también de esa otra historia que va creando a través de los siglos la labor lenta, afanosa y sin resonancia de millares y millares de seres anónimos”.</p><cite>(Torres Balbás, 1954, p. 60)</cite></blockquote>
+<p>Analizar la organización espacial enriquece cualquier investigación sobre el pasado: permite alejarse del puerto de la oficialidad sin perderlo de vista y orientarse hacia un actor histórico que es protagonista y espectador, con la sociedad en su conjunto como cómplice. Este recorrido se concentra en la configuración espacial de las ciudades y en el papel del factor religioso, con mezquitas e iglesias como espacios organizadores no solo de la vida social, sino también de la vida espacial de las personas.</p>
+<details><summary>Nota sobre la periodización</summary><p>Las ciudades cristianas y musulmanas responden a procesos y cronologías distintos, influidos por el factor religioso, la geografía y las transformaciones económicas. Por eso se hace una comparación diacrónica y estructural: se aborda la evolución de un fenómeno en tiempos diferentes, ubicando cada uno en su tiempo y espacio precisos. En el caso cristiano, la vida urbana clásica sufre una grave regresión económica y demográfica alrededor del siglo V; el desarrollo de la ciudad musulmana espera la conformación del Califato Omeya, hacia 661 E.C. (41 A.H.).</p></details>
+<details><summary>Referencia</summary><p>Torres Balbás, L. (1954). Las ciudades musulmanas y su urbanización. <i>Revista de Educación</i>, (6), p. 60. Delgado Gómez, S. M. Todos los caminos conducen al templo: las ciudades medievales y el factor religioso (siglos VII–X). Universidad Pedagógica Nacional.</p></details></div>
+<div class="sec"><h3 class="t">Una pregunta, dos respuestas</h3>
+<p>Tras la caída de Roma, cristianos y musulmanes se hicieron la misma pregunta: <b>¿cómo ordenar el espacio para que refleje una forma de entender el mundo?</b> En ambos casos, lo sagrado fue el hilo que organizó la ciudad, pero tiraron de él en direcciones contrarias.</p>
+<div class="duo"><div class="c"><b>Hacia afuera</b>Ciudad cristiana: lo público, la plaza, la comunidad.</div><div class="i"><b>Hacia adentro</b>Ciudad islámica: lo privado, el patio, la intimidad.</div></div></div></div>
+
+<div class="hero" id="cristiana" style="background-image:linear-gradient(rgba(20,10,0,.62),rgba(20,10,0,.74)),url('images/cristo.png')">
+<h2><span class="fk">C</span>iudad Cristiana</h2>
+<p>Nació de la inercia de un imperio que se desmoronaba: la Iglesia heredó la ciudad romana y la convirtió en ciudad episcopal.</p></div>
+<div class="bgc"><div class="wrap sec">
+<h3 class="t">Conceptos clave</h3><p class="hint">Toca cada tarjeta para desplegarla.</p>
+<div class="cards" data-set="c"></div>
+<details><summary>Citas textuales y referencias</summary>
+<blockquote><p>“La ciudad medieval, tal y como aparece a partir del siglo XII, es una comuna que, al abrigo de un recinto fortificado, vive del comercio y de la industria y disfruta de un derecho, de una administración y de una jurisprudencia excepcionales que la convierten en una personalidad colectiva privilegiada”.</p><cite>(Pirenne, 1972, p. 137)</cite></blockquote>
+<blockquote><p>“Un régimen teocrático había reemplazado completamente al régimen municipal de la antigüedad. La población estaba gobernada por su obispo y no reivindicaba nada…”.</p><cite>(Pirenne, 1972, p. 34)</cite></blockquote>
+<blockquote><p>“Las ciudades cristianas tenían una participación activa en su gobierno, por medio de los ayuntamientos y la catedral, que eran los ejes de la política ciudadana […] La burguesía medieval, urbana y feudal, controlaba el gobierno de las ciudades”.</p><cite>(Anexo 7: La ciudad medieval, s. f., p. 2)</cite></blockquote>
+<p>Pirenne, H. (1972). <i>Las ciudades de la Edad Media</i>. Alianza Editorial. Anexo 7: La ciudad medieval. (s. f.).</p></details>
+<figure><img src="images/saint_gall.png" alt="Planta de Saint Gall">
+<figcaption>Planta de Saint Gall. Reichenau, principios del siglo IX.<br>Fuente: <a href="https://es.wikipedia.org/wiki/Planta_de_Sankt_Gallen">es.wikipedia.org/wiki/Planta_de_Sankt_Gallen</a></figcaption>
+<details style="text-align:left"><summary>Referencia</summary><p>«Planta de Sankt Gallen». <i>Wikipedia, la enciclopedia libre</i>. https://es.wikipedia.org/wiki/Planta_de_Sankt_Gallen</p></details></figure>
+</div></div>
+
+<div class="hero" id="islamica" style="background-image:linear-gradient(rgba(20,10,0,.6),rgba(20,10,0,.76)),url('images/puerta.png')">
+<h2><span class="fk">C</span>iudad Islámica</h2>
+<p>Nació de la expansión de una fe: asimiló ciudades antiguas, fundó campamentos y levantó capitales como Bagdad.</p></div>
+<div class="bgi"><div class="wrap sec">
+<h3 class="t">Conceptos clave</h3><p class="hint">Toca cada tarjeta para desplegarla.</p>
+<div class="cards" data-set="i"></div>
+<details><summary>Citas textuales y referencias</summary>
+<blockquote><p>“La zona periurbana se define en función de la cerca urbana, que encierra elementos o espacios mutuamente diferenciados pero que posee cada uno su recinto: la ciudadela o fortaleza político-militar, la medina o ciudad civil, los arrabales…”.</p><cite>(Epalza, 1991, p. 10)</cite></blockquote>
+<blockquote><p>“La mayor parte de la población residía fuera del centro, en otros barrios (<i>harat</i>) […] Los habitantes de un barrio solían vincularse por un origen común, religioso, étnico o regional […] Estos lazos creaban una solidaridad muy fuerte”.</p><cite>(Youssef Hoteit, 1993, pp. 40–41)</cite></blockquote>
+<blockquote><p>“Para su gobierno la Córdoba califal contaba con el <i>sahib al-madina</i> (zalmedina) o gobernador de la ciudad; el <i>qadi</i> o juez, el <i>sahib al-suq</i> (zabazoque) o inspector y juez del mercado…”.</p><cite>(Ríu, 1991, p. 241)</cite></blockquote>
+<blockquote><p>“La función de la <i>hisba</i> es un cargo religioso […] No tiene una competencia general para todos los hechos que se le presentan sino solamente para lo que concierne al fraude, en los engaños en los alimentos y otras mercancías así como en las medidas y en los pesos”.</p><cite>(Ibn Jaldún, citado en Youssef Hoteit, 1993, p. 9)</cite></blockquote>
+<p>Epalza, M. de (1991). Youssef Hoteit, A. (1993). Cultura, espacio y organización urbana en la ciudad islámica. <i>Cuadernos de Investigación Urbanística</i>, (5). Ríu Ríu, M. (1991). La ciudad en el ámbito mediterráneo durante el cambio de milenio. En <i>Actas del Congreso La Ciudad Islámica</i>.</p></details>
+<figure><img src="images/meca.png" alt="La Meca en una miniatura persa">
+<figcaption>La ciudad de La Meca en una miniatura persa del siglo XIX.<br>Fuente: <a href="https://www.meisterdrucke.es/impresion-art%C3%ADstica/Persian-School/998911/Islam:-vista-de-la-Kaaba-%28Ka%27aba-o-Ka%27ba%29-edificio-c%C3%BAbico-ubicado-en-el-centro-de-la-Gran-Mezquita-en-La-Meca.-Miniatura-persa.-Siglo-XV..html">Meisterdrucke, Escuela persa</a></figcaption>
+<details style="text-align:left"><summary>Referencia</summary><p>Escuela persa. <i>Islam: vista de la Kaaba… Miniatura persa</i>. Meisterdrucke.</p></details></figure>
+</div></div>
+
+<div class="wrap sec" id="comparar">
+<h3 class="t">Comparador: dos modos de habitar</h3><p class="hint">Elige una dimensión y compara.</p>
+<div class="tabs" role="tablist" id="tabs"></div><div class="cmp" id="cmp"></div><div class="ide" id="ide"></div><div class="dp"><b>PARA PROFUNDIZAR</b><br><span id="dp"></span></div>
+<details><summary>Referencia</summary><p id="cref"></p></details>
+</div>
+
+<div class="wrap sec" id="juego">
+<h3 class="t">Ponte a prueba</h3><p class="hint">¿A qué ciudad pertenece cada rasgo?</p>
+<div class="quiz"><div class="q" id="qq"></div><div class="row"><button class="btn" data-a="c">Ciudad cristiana</button><button class="btn" data-a="i">Ciudad islámica</button></div><div class="fb" id="fb" aria-live="polite"></div><div class="row"><button class="btn" id="nx" hidden>Siguiente</button></div><div id="sc" style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--mute)"></div></div>
+</div>
+
+<div class="wrap sec" id="conclusiones">
+<h3 class="t">Conclusiones</h3>
+<div class="ccl">
+<div><b>Dos respuestas a una necesidad</b><p>Ambas ciudades dieron forma material a una cosmovisión: la cristiana se volcó a lo público y comunitario; la islámica, a lo privado e íntimo.</p></div>
+<div><b>Los orígenes pesan</b><p>Una nació de la continuidad de la Iglesia sobre la administración romana; la otra combinó asimilación, campamento y fundación regia.</p></div>
+<div><b>Un solo templo, muchas funciones</b><p>La mezquita concentró lo que en el mundo cristiano se repartió entre catedral, ayuntamiento y plaza.</p></div>
+<div><b>Más que una oposición</b><p>Ambas protegieron lo valioso, con sagreras y murallas o con adarves y fachadas ciegas, y en ambas la religión fue más que espiritual.</p></div>
+</div>
+<p style="margin-top:16px;text-align:center;font-style:italic">Leer una calle, una fachada o un mercado es leer la historia de millares de seres anónimos (Torres Balbás, 1954).</p>
+</div>
+
+<div class="wrap sec" id="refs"><h3 class="t">Referencias</h3>
+<p style="font-size:.92rem">Anexo 7: La ciudad medieval. (s. f.).<br>Chueca Goitia, F. (1982). La ciudad islámica. <i>Boletín del Instituto de Estudios Giennenses</i>, (110).<br>Epalza, M. de (1991).<br>Heers, J. (1995). <i>La invención de la Edad Media</i>. Editorial Crítica.<br>Maier (1971); Mitre (2010), citado en Fernández de Córdova (2010).<br>Pirenne, H. (1972). <i>Las ciudades de la Edad Media</i>. Alianza Editorial.<br>Ríu Ríu, M. (1991). La ciudad en el ámbito mediterráneo durante el cambio de milenio. En <i>Actas del Congreso La Ciudad Islámica</i>.<br>Torres Balbás, L. (1954). Las ciudades musulmanas y su urbanización. <i>Revista de Educación</i>, (6).<br>Youssef Hoteit, A. (1993). Cultura, espacio y organización urbana en la ciudad islámica. <i>Cuadernos de Investigación Urbanística</i>, (5).</p></div>
+<footer>Sebastián Mauricio Delgado Gómez · Universidad Pedagógica Nacional · Historia de las Sociedades Medievales</footer>
+
+<script>
+const C=[["Civitas episcopal","La ciudad como diócesis","La Iglesia calcó sus circunscripciones de las divisiones imperiales; desde el siglo VI civitas significa «ciudad episcopal». El obispo, sedentario por derecho canónico, se volvió autoridad administrativa, fiscal y judicial (Pirenne, 1972, p. 33)."],
+["Portus y burgo","El comercio vuelve a las puertas","Hacia los siglos XI y XII, la plaza comercial permanente se fusionó con la fortaleza hasta absorberla, y la ciudad creció extramuros (Pirenne, 1972, pp. 78, 80)."],
+["Sagrera","La protección del templo","Tierras sagradas de 15 a 60 pasos alrededor de la iglesia que terminaban convertidas en barrios amparados por ella (Ríu, 1991, p. 231)."],
+["Recinto y fuero","La muralla como estatuto","El muro delimitaba la paz urbana y un derecho propio: la comuna como «personalidad colectiva privilegiada» (Pirenne, 1972, p. 137)."],
+["Concejo","Del obispo al ayuntamiento","El gobierno teocrático dio paso a una participación laica: ayuntamientos y catedral como ejes de la política, bajo control de la burguesía."]];
+const I=[["Maskan y hijab","La casa como santuario","Maskan viene de una raíz que significa paz y tranquilidad; el patio abierto al cielo protege la intimidad familiar (hijab) y explica las fachadas ciegas (Youssef Hoteit, 1993, p. 41)."],
+["Adarve (darb)","La calle que es de las casas","Callejón sin salida que sirve a las casas que se abren a él y se cierra de noche; la casa obligó a la calle a acomodarse (Youssef Hoteit, 1993, pp. 32, 34)."],
+["Mezquita aljama","El corazón de la medina","Centro espiritual, político, judicial y comercial: allí se leen decretos, se anuncian investiduras y se notifican asuntos fiscales (Youssef Hoteit, 1993, p. 36)."],
+["Zoco y alcaicería","El mercado bajo la sombra de la mezquita","Tiendas fijas y mercados permanentes; las alcaicerías agrupan joyas, seda y lujo en barrios propios (Youssef Hoteit, 1993, p. 38)."],
+["Harat","El barrio como comunidad","Barrios unidos por un origen común, religioso, étnico o regional, con lazos de gran solidaridad (Youssef Hoteit, 1993, pp. 40–41)."],
+["Hisba","La fe vigila el mercado","Cargo religioso que controla el fraude en alimentos, pesos y medidas (Ibn Jaldún, citado en Youssef Hoteit, 1993, p. 9)."],
+["Umma","La comunidad de creyentes","La ciudad es la comunidad de quienes obedecen la ley; la igualdad ante Dios invita a la discreción y al recato (Youssef Hoteit, 1993, pp. 18–20)."]];
+const X={c:["El vacío administrativo que dejó el Imperio no desarmó la red territorial: la Iglesia adaptó sus circunscripciones a las antiguas demarcaciones. Con las autoridades civiles alojadas en dominios rurales, el obispo se volvió sinónimo de autoridad y el conjunto catedralicio, corazón topográfico y cívico de la ciudad.","Aquí el motor es el comercio: mercaderes y artesanos se asentaban junto a la fortaleza o en cruces de caminos, fuera de la muralla. Con el tiempo ese barrio mercantil se volvió tan importante que absorbió a la antigua ciudad fortificada. Así surgieron los burgos nuevos extramuros, que la burguesía administró luego mediante fueros o cartas de franquicia.","La sagrera muestra que el templo no solo daba culto: daba refugio. Alrededor del templo, la tierra sagrada atraía reliquias, peregrinos y la búsqueda de inmunidad, y terminaba convertida en barrios amparados por la iglesia. Lo religioso se volvió un factor de crecimiento urbano.","La muralla no solo defendía: delimitaba el fuero y la «paz urbana». Dentro del recinto, la comuna gozaba de un derecho, una administración y una jurisprudencia excepcionales que la convertían en una personalidad colectiva privilegiada, base de la idea de que «el aire de la ciudad hace libre».","El obispo gobernó primero por su prestigio religioso y por la ausencia de otras autoridades. Con el auge de la burguesía, que controlaba el gobierno de las ciudades, los ayuntamientos y la catedral se convirtieron en los ejes de la política ciudadana."],i:["Aquí la religión llega hasta la arquitectura doméstica: la casa es un espacio sagrado que no se puede allanar sin permiso. Todo se organiza de adentro hacia afuera, con las habitaciones hacia el patio y pocas aberturas a la calle. La fachada sencilla evita exhibir la riqueza y expresa la igualdad entre creyentes.","El adarve es un espacio intermedio: no es la casa ni la calle pública, sino un ramal semiprivado de familias vecinas. Sus quiebros bloquean la vista desde afuera y protegen la intimidad. Por eso la medina parece un laberinto: no responde a un diseño pensado para circular, sino a la suma de las casas.","En el islam no se separa el poder religioso del secular, y la mezquita lo hace visible: allí se ora, se enseña, se juzga y se informa a la comunidad. Su ubicación en el centro de la medina ordena el resto, pues los mercados se disponen a su alrededor.","El comercio islámico no se desarrolló al margen de la religión: su jerarquía espacial se organiza en torno a la mezquita. Las alcaicerías, núcleo comercial de lujo (seda, oro, joyas), se adosan a sus muros y se cierran de noche como un micro-recinto vigilado.","Si la ciudad cristiana se identificaba por el privilegio de toda la comuna, la islámica se vive a escala de barrio. En la harat se comparten origen, fe o región, y los vecinos se cuidan entre sí. Muchos barrios se cerraban de noche, lo que reforzaba esa solidaridad interna.","El almotacén (muhtasib) no es un simple inspector: actúa en nombre de la moral religiosa. Vigila que no haya engaño en alimentos, pesos y medidas, y muestra cómo la fe regula hasta la transacción cotidiana. En Córdoba convivía con el gobernador y el juez.","La umma explica el recato: si todos son iguales ante Dios, exhibir fortuna o rango ofende a la comunidad. La ciudad es, ante todo, el espacio de los creyentes, y no un territorio de privilegios jurídicos como la comuna cristiana."]};
+document.querySelectorAll('.cards').forEach(g=>{(g.dataset.set=='c'?C:I).forEach(([t,z,d],n)=>{const b=document.createElement('button');b.className='card';b.setAttribute('aria-expanded','false');b.innerHTML='<h4>'+t+'</h4><div class="tz">'+z+'</div><div class="df">'+d+'<div class="ex"><b>PARA PROFUNDIZAR</b><br>'+X[g.dataset.set][n]+'</div></div>';b.onclick=()=>b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!='true');g.appendChild(b)})});
+const D=[["Origen","Heredar y adaptar","La civitas romana se vuelve ciudad episcopal; luego nacen portus y burgos (siglos XI–XII).","Heredar y fundar","Asimila urbes antiguas, crea campamentos (Basora, Kufa) y capitales califales (Bagdad).","Una continúa; la otra también funda.","Pirenne (1972), pp. 33, 78, 80; Chueca Goitia (1982), p. 10; Maier (1971), p. 279."],
+["Trazado","Calle de convivencia","Espacio abierto con plazas, iglesias y plazas porticadas.","Calle que sobra de las casas","Trazado tortuoso con adarves que se cierran de noche.","Una parte de lo común; la otra, de lo privado.","Chueca Goitia (1982), p. 10; Youssef Hoteit (1993), pp. 32, 34."],
+["Vivienda","Casa que se abre","Unos 45 m² por planta, con vanos hacia la calle.","Casa que se repliega","Patio interior, tapias casi ciegas y celosías para ver sin ser visto.","Apertura frente a recato.","Ríu (1991), p. 231; Chueca Goitia (1982), p. 11; Youssef Hoteit (1993), p. 41."],
+["Centro sagrado","Catedral y sagreras","Culto y protección; naves para acoger al campo en las solemnidades.","Mezquita aljama","Centro político, judicial y comercial, con la musalla fuera de la muralla.","Lo sagrado es central en ambas; la mezquita concentra más funciones.","Heers (1995), p. 223; Ríu (1991), p. 231; Youssef Hoteit (1993), pp. 36–37."],
+["Comercio","Mercado abierto","En plaza, puerta o cementerio, sin tiendas fijas.","Zoco permanente","Tiendas fijas y alcaicerías en torno a la mezquita.","Feria ocasional frente a ciudad comercial.","Anexo 7 (s. f.), pp. 1–2; Youssef Hoteit (1993), p. 38."],
+["Gobierno","Del obispo al concejo","Teocracia episcopal que cede ante la burguesía laica.","Cargos estables","Zalmedina, cadí, zabazoque y la hisba religiosa.","Cambio histórico frente a estructura estable.","Pirenne (1972), p. 34; Ríu (1991), p. 241; Ibn Jaldún, citado en Youssef Hoteit (1993), p. 9."],
+["Espacio e inmunidad","Muralla y fuero","La ciudad entera es un privilegio jurídico.","Recintos y barrios","Ciudadela, medina y arrabales; vida en barrios (harat).","Una identidad común frente a comunidades cohesionadas.","Pirenne (1972), p. 137; Epalza (1991), p. 10; Youssef Hoteit (1993), pp. 40–41."],
+["Valores","Ciudadanos hermanos","Mismos derechos y primeras escuelas laicas (siglo XII).","Umma","Igualdad ante Dios, recato y fachadas sin ostentación.","Libertad cívica frente a comunidad de fe.","Mitre (2010), citado en Fernández de Córdova (2010), p. 823; Pirenne (1972), p. 140; Youssef Hoteit (1993), pp. 18–20."]];
+const DX=["Ambas ciudades parten de la herencia romana, pero con actores distintos. En Occidente, la continuidad la ofrece la Iglesia; en el mundo islámico, los conquistadores reutilizan materiales y estructuras y además fundan: Basora, Kufa y Bagdad muestran la ciudad como símbolo de poder político y religioso. También pesa el calendario: el urbanismo islámico se consolida con el califato omeya (661), mientras Europa vive una regresión urbana desde el siglo V.","El trazado es la huella de una visión del mundo. La ciudad abierta hereda la plaza y la calle como lugares de encuentro; la ciudad introvertida reduce la calle a lo necesario para llegar a casa. Más adelante, entre los siglos XII y XIV, las villas nuevas cristianas adoptaron cuadrículas planificadas, lo que recuerda que la «ciudad cristiana» no fue un modelo único.","La vivienda es donde el contraste se vuelve cotidiano. La casa cristiana, pequeña y volcada a la calle, hace de la vida social una prolongación del hogar; la musulmana, con su patio y su fachada austera, hace del hogar un refugio y separa incluso los espacios internos para preservar la intimidad.","Lo sagrado organiza ambas ciudades, pero reparte el poder de otro modo. En la cristiana, catedral, castillo y ayuntamiento se reparten funciones; en la islámica, la mezquita concentra la vida religiosa, política y comercial. La diferencia no está en cuánto importa el templo, sino en cuántas cosas ocurren en él.","El comercio revela la escala y el tipo de ciudad. En la Europa cristiana de esos siglos el intercambio era ocasional y las poblaciones eran menores; en el mundo islámico el mercado permanente era parte de la vida diaria. Según el material de apoyo, hacia el año 1000 Córdoba tenía entre 100.000 y 300.000 habitantes, frente a unos 1.250 en Barcelona y 3.000 en Arlés; menos del 10 % de la población europea cristiana vivía en ciudades.","La trayectoria política es el contraste más claro entre cambio y continuidad. La ciudad cristiana pasó de la autoridad del obispo a un gobierno laico controlado por la burguesía; la islámica mantuvo una estructura de cargos donde justicia, gobierno y control del mercado estaban atravesados por lo religioso.","La muralla cristiana protege un estatuto jurídico colectivo; los recintos islámicos organizan el acceso por niveles: ciudadela, medina y arrabales, cada uno con su cerca. En ambos casos el límite es más que defensa: define quién pertenece y bajo qué reglas.","Los valores explican las formas. Para la ciudad cristiana, la idea de ciudadano libre y hermano impulsa instituciones cívicas como los concejos y las escuelas laicas; para la islámica, la pertenencia a la umma y la igualdad ante Dios explican el recato en el espacio. Ambos sistemas buscan orden, pero con distinto centro: la comunidad cívica o la comunidad de fe."];
+const tb=document.getElementById('tabs');
+function show(n){[...tb.children].forEach((b,j)=>b.setAttribute('aria-selected',j==n));const d=D[n];
+document.getElementById('cmp').innerHTML='<div class="c"><h4>CIUDAD CRISTIANA</h4><div class="k">'+d[1]+'</div><p>'+d[2]+'</p></div><div class="i"><h4>CIUDAD ISLÁMICA</h4><div class="k">'+d[3]+'</div><p>'+d[4]+'</p></div>';
+document.getElementById('ide').textContent=d[5];document.getElementById('cref').textContent=d[6];document.getElementById('dp').textContent=DX[n]}
+D.forEach((d,n)=>{const b=document.createElement('button');b.textContent=d[0];b.setAttribute('role','tab');b.onclick=()=>show(n);tb.appendChild(b)});show(0);
+const Q=[["Las casas abren ventanas a la calle, que es lugar de convivencia.","c","La ciudad cristiana heredó el modelo grecorromano abierto."],
+["Un callejón sin salida, cerrado de noche, sirve a un grupo de familias.","i","Es el adarve o darb, extensión semiprivada de las casas."],
+["El mercado se instala en la plaza, la puerta o el cementerio, sin tiendas fijas.","c","Eran mercados temporales en espacios abiertos."],
+["Un funcionario religioso vigila el fraude en pesos y medidas.","i","Es la hisba, cargo del gobierno islámico."],
+["Un terreno sagrado alrededor del templo acaba convirtiéndose en barrio.","c","Son las sagreras o celleras."]];
+let k=0,s=0,done=false;const qq=document.getElementById('qq'),fb=document.getElementById('fb'),nx=document.getElementById('nx'),sc=document.getElementById('sc'),bs=document.querySelectorAll('.quiz [data-a]');
+function load(){done=false;fb.textContent='';nx.hidden=true;bs.forEach(b=>b.disabled=false);if(k<Q.length){qq.textContent='“'+Q[k][0]+'”';sc.textContent='Pregunta '+(k+1)+' de '+Q.length+' · Aciertos: '+s}else{qq.textContent='Aciertos: '+s+' de '+Q.length+(s>=4?'. ¡Buen lector de ciudades!':'. Repasa los conceptos y vuelve a intentarlo.');bs.forEach(b=>b.disabled=true);nx.textContent='Reiniciar';nx.hidden=false;sc.textContent=''}}
+bs.forEach(b=>b.onclick=()=>{if(done)return;done=true;const ok=b.dataset.a==Q[k][1];if(ok)s++;fb.innerHTML='<span class="'+(ok?'ok':'no')+'">'+(ok?'¡Correcto! ':'No exactamente. ')+'</span>'+Q[k][2];bs.forEach(x=>x.disabled=true);nx.textContent=k<Q.length-1?'Siguiente':'Ver resultado';nx.hidden=false});
+nx.onclick=()=>{if(k>=Q.length){k=0;s=0}else k++;load()};load();
+</script>
+</body></html>
